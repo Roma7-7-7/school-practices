@@ -3,7 +3,8 @@
  * Addition/subtraction walk through place-value decomposition of the second
  * number (e.g. 24 + 25 = 24 + 20 + 5 = 44 + 5 = 49); multiplication/division
  * are single-step fact-family checks. Only one operation panel is visible
- * at a time, switched via the tab buttons (MathFramework.setupTabs).
+ * at a time, switched via the tab buttons (MathFramework.setupTabs), which
+ * also resets the stopwatch — "Нова вправа" does not.
  */
 (function () {
   const panels = {
@@ -174,9 +175,12 @@
     );
   }
 
+  const stopwatch = MathFramework.setupStopwatch(document.getElementById("stopwatch"));
+
   const activateTab = MathFramework.setupTabs(tabs, panels, (op) => {
     currentOp = op;
     generateProblem(op);
+    stopwatch.reset();
   });
 
   generateBtn.addEventListener("click", () => generateProblem(currentOp));

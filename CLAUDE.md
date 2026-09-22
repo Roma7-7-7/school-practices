@@ -23,7 +23,8 @@ index.html                     Entry point — lists activities, GitHub Pages ro
 assets/css/main.css            Design tokens + shared components (buttons, cards, digit-input, feedback)
 assets/js/main.js              Shared behavior: digit-input navigation, validation/feedback
                                 helpers, random-int + data-role/data-field lookup helpers, tab
-                                switcher for multi-mode activities (see the file's own comments)
+                                switcher for multi-mode activities, stopwatch (see the file's
+                                own comments)
 assets/js/activities-data.js   Registry of activities shown on the index page
 assets/js/index-page.js        Renders the registry into the index page grid
 activities/<slug>/index.html   One folder per activity; owns its own script.js and, if truly needed, style.css
@@ -61,14 +62,15 @@ Conventions the skill (and any manual work) must follow:
 - Include the standard meta tags (viewport + `apple-mobile-web-app-capable`) — see any existing
   activity or `index.html` for the exact block. This matters for iPad "Add to Home Screen" use.
 - Reuse `assets/css/main.css` component classes (`.card`, `.btn`, `.digit-input`, `.feedback`,
-  `.badge`) instead of inventing new ad-hoc styles. Add new shared components to `main.css`
-  itself when a pattern is genuinely reused across activities, not per-activity.
+  `.badge`, `.stopwatch`) instead of inventing new ad-hoc styles. Add new shared components to
+  `main.css` itself when a pattern is genuinely reused across activities, not per-activity.
 - Reuse `MathFramework.setupDigitInputs`, `MathFramework.validateFields`, `MathFramework.setFeedback`,
-  `MathFramework.randInt`, `MathFramework.setRole`/`getField`, and `MathFramework.setupTabs` from
-  `main.js` for the digit-box equation pattern (see that file's comments, and the
-  `equation-exercise` skill for how to turn a pasted sample into code) instead of re-implementing
-  auto-advance/validation/tabs per activity — this was the main duplication problem in the legacy
-  pages. `activities/four-operations/` is a worked reference implementation.
+  `MathFramework.randInt`, `MathFramework.setRole`/`getField`, `MathFramework.setupTabs`, and
+  `MathFramework.setupStopwatch` from `main.js` for the digit-box equation pattern (see that
+  file's comments, and the `equation-exercise` skill for how to turn a pasted sample into code)
+  instead of re-implementing auto-advance/validation/tabs/timing per activity — this was the main
+  duplication problem in the legacy pages. `activities/four-operations/` is a worked reference
+  implementation, including a stopwatch reset on tab switch.
 - No persistence/score-tracking across sessions (by explicit decision — keep activities
   stateless: generate → check → try again). Revisit only if asked.
 - Tag activities in `activities-data.js` with whatever topics genuinely apply
