@@ -11,6 +11,11 @@ iPad checklist, no persistence). This skill just automates the boilerplate; it d
 actual exercise generation/validation logic — that's activity-specific and comes from the user or
 a follow-up implementation step.
 
+If the user describes the exercise with bracket/placeholder notation (e.g. `24 + [ ][ ] + [ ]`
+plus a worked `SOLUTION sample`), use the `equation-exercise` skill for step 3 below instead of
+inventing the layout from scratch — it documents how to read that notation and wire it to the
+shared digit-box/equation/tab framework.
+
 ## Steps
 
 1. **Gather what's needed** (ask the user for whatever isn't already given in the conversation):

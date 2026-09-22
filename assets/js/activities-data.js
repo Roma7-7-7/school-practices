@@ -9,4 +9,12 @@
  * math-1.html / math-2.html are linked separately from the legacy section
  * in index.html until they're reimplemented into activities/<slug>/.
  */
-window.ACTIVITIES = [];
+window.ACTIVITIES = [
+  {
+    slug: "four-operations",
+    title: "Чотири дії",
+    description: "Додавання, віднімання, множення та ділення — з поясненням кроків для додавання й віднімання.",
+    tags: ["додавання", "віднімання", "множення", "ділення", "розрядність"],
+    path: "activities/four-operations/index.html",
+  },
+];

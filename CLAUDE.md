@@ -21,7 +21,9 @@ for conventions — read it before adding or changing anything.
 ```
 index.html                     Entry point — lists activities, GitHub Pages root
 assets/css/main.css            Design tokens + shared components (buttons, cards, digit-input, feedback)
-assets/js/main.js              Shared behavior: digit-input navigation, validation helpers, feedback helper
+assets/js/main.js              Shared behavior: digit-input navigation, validation/feedback
+                                helpers, random-int + data-role/data-field lookup helpers, tab
+                                switcher for multi-mode activities (see the file's own comments)
 assets/js/activities-data.js   Registry of activities shown on the index page
 assets/js/index-page.js        Renders the registry into the index page grid
 activities/<slug>/index.html   One folder per activity; owns its own script.js and, if truly needed, style.css
@@ -30,7 +32,10 @@ math-1.html, math-2.html       Legacy activities, pre-dating this framework. Lef
                                 one at a time into activities/<slug>/. Do not edit their content
                                 unless explicitly asked — the user is reimplementing them by hand
                                 and will use the originals only as reference.
-.claude/skills/new-activity/   Skill that scaffolds a new activity folder + registry entry
+.claude/skills/new-activity/     Skill that scaffolds a new activity folder + registry entry
+.claude/skills/equation-exercise/ Skill that turns a pasted bracket/placeholder sample (e.g.
+                                  "24 + [ ][ ] + [ ]") into generate/render/validate code using
+                                  the shared digit-box/equation/tab framework
 ```
 
 ## Critical rule: relative paths only
@@ -58,10 +63,12 @@ Conventions the skill (and any manual work) must follow:
 - Reuse `assets/css/main.css` component classes (`.card`, `.btn`, `.digit-input`, `.feedback`,
   `.badge`) instead of inventing new ad-hoc styles. Add new shared components to `main.css`
   itself when a pattern is genuinely reused across activities, not per-activity.
-- Reuse `MathFramework.setupDigitInputs`, `MathFramework.validateFields`,
-  `MathFramework.setFeedback` from `main.js` for the digit-box equation pattern (see that file's
-  comments) instead of re-implementing auto-advance/validation per activity — this was the main
-  duplication problem in the legacy pages.
+- Reuse `MathFramework.setupDigitInputs`, `MathFramework.validateFields`, `MathFramework.setFeedback`,
+  `MathFramework.randInt`, `MathFramework.setRole`/`getField`, and `MathFramework.setupTabs` from
+  `main.js` for the digit-box equation pattern (see that file's comments, and the
+  `equation-exercise` skill for how to turn a pasted sample into code) instead of re-implementing
+  auto-advance/validation/tabs per activity — this was the main duplication problem in the legacy
+  pages. `activities/four-operations/` is a worked reference implementation.
 - No persistence/score-tracking across sessions (by explicit decision — keep activities
   stateless: generate → check → try again). Revisit only if asked.
 - Tag activities in `activities-data.js` with whatever topics genuinely apply

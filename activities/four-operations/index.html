@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#4763e4">
+  <title>Чотири дії</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="../../index.html">← На головну</a>
+    <header class="site-header">
+      <h1>Чотири дії</h1>
+      <p>Обери дію та розв'яжи приклад крок за кроком</p>
+    </header>
+
+    <div class="op-tabs" role="tablist">
+      <button class="op-tab is-active" type="button" data-op="add">➕<span>Додавання</span></button>
+      <button class="op-tab" type="button" data-op="sub">➖<span>Віднімання</span></button>
+      <button class="op-tab" type="button" data-op="mul">✖️<span>Множення</span></button>
+      <button class="op-tab" type="button" data-op="div">➗<span>Ділення</span></button>
+    </div>
+
+    <section class="op-panel" id="panel-add" data-op-panel="add">
+      <div class="equation">
+        <div class="equation-row">
+          <input class="digit-input is-readonly" type="text" readonly data-role="add-a-tens">
+          <input class="digit-input is-readonly" type="text" readonly data-role="add-a-ones">
+          <span class="operator">+</span>
+          <input class="digit-input is-readonly" type="text" readonly data-role="add-b-tens">
+          <input class="digit-input is-readonly" type="text" readonly data-role="add-b-ones">
+        </div>
+        <div class="operator">=</div>
+        <div class="equation-row">
+          <input class="digit-input is-readonly" type="text" readonly data-role="add-a-tens-2">
+          <input class="digit-input is-readonly" type="text" readonly data-role="add-a-ones-2">
+          <span class="operator">+</span>
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="add-decomp-tens">
+          <input class="digit-input is-readonly" type="text" readonly value="0">
+          <span class="operator">+</span>
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="add-decomp-ones">
+        </div>
+        <div class="operator">=</div>
+        <div class="equation-row">
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="add-sum-tens">
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="add-sum-ones">
+          <span class="operator">+</span>
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="add-ones-again">
+        </div>
+        <div class="operator">=</div>
+        <div class="equation-row">
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="add-result-tens">
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="add-result-ones">
+        </div>
+      </div>
+    </section>
+
+    <section class="op-panel is-hidden" id="panel-sub" data-op-panel="sub">
+      <div class="equation">
+        <div class="equation-row">
+          <input class="digit-input is-readonly" type="text" readonly data-role="sub-a-tens">
+          <input class="digit-input is-readonly" type="text" readonly data-role="sub-a-ones">
+          <span class="operator">−</span>
+          <input class="digit-input is-readonly" type="text" readonly data-role="sub-b-tens">
+          <input class="digit-input is-readonly" type="text" readonly data-role="sub-b-ones">
+        </div>
+        <div class="operator">=</div>
+        <div class="equation-row">
+          <input class="digit-input is-readonly" type="text" readonly data-role="sub-a-tens-2">
+          <input class="digit-input is-readonly" type="text" readonly data-role="sub-a-ones-2">
+          <span class="operator">−</span>
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="sub-decomp-tens">
+          <input class="digit-input is-readonly" type="text" readonly value="0">
+          <span class="operator">−</span>
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="sub-decomp-ones">
+        </div>
+        <div class="operator">=</div>
+        <div class="equation-row">
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="sub-sum-tens">
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="sub-sum-ones">
+          <span class="operator">−</span>
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="sub-ones-again">
+        </div>
+        <div class="operator">=</div>
+        <div class="equation-row">
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="sub-result-tens">
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="sub-result-ones">
+        </div>
+      </div>
+    </section>
+
+    <section class="op-panel is-hidden" id="panel-mul" data-op-panel="mul">
+      <div class="equation">
+        <div class="equation-row">
+          <span class="operand" data-role="mul-x"></span>
+          <span class="operator">×</span>
+          <span class="operand" data-role="mul-y"></span>
+          <span class="operator">=</span>
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="mul-result-tens">
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="mul-result-ones">
+        </div>
+      </div>
+    </section>
+
+    <section class="op-panel is-hidden" id="panel-div" data-op-panel="div">
+      <div class="equation">
+        <div class="equation-row">
+          <span class="operand" data-role="div-dividend"></span>
+          <span class="operator">÷</span>
+          <span class="operand" data-role="div-divisor"></span>
+          <span class="operator">=</span>
+          <input class="digit-input" type="text" inputmode="numeric" maxlength="1" data-field="div-quotient">
+        </div>
+      </div>
+    </section>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="generateBtn">Нова вправа</button>
+      <button class="btn btn-secondary" id="checkBtn">Перевірити</button>
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+  </div>
+
+  <script src="../../assets/js/main.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,8 +1,12 @@
 /*
  * Shared behavior for activity pages: the digit-box equation input pattern
- * (auto-advance, backspace-to-previous, digits-only) and simple field
- * validation + feedback helpers. Extracted from the duplicated per-level
- * logic in the legacy pages (math-1.html) so new activities don't re-implement it.
+ * (auto-advance, backspace-to-previous, digits-only), field validation +
+ * feedback helpers, a random-int generator, data-attribute lookup helpers
+ * for filling/reading equation slots, and a tab switcher for activities that
+ * offer multiple modes (operations, levels, ...) on one page. Extracted from
+ * the duplicated per-level logic in the legacy pages (math-1.html) so new
+ * activities don't re-implement it — see activities/four-operations/script.js
+ * for a worked example using every helper here.
  *
  * Usage from an activity's script.js:
  *   MathFramework.setupDigitInputs(document.getElementById('level1'));
@@ -70,5 +74,51 @@ window.MathFramework = (function () {
     el.className = "feedback " + (success ? "feedback--success" : "feedback--error");
   }
 
-  return { setupDigitInputs, clearInputs, validateFields, setFeedback };
+  function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  // Fills a [data-role] slot (a readonly .digit-input or a plain .operand
+  // span) inside `container` with `value` — used for the given/derived
+  // numbers of a generated problem.
+  function setRole(container, role, value) {
+    const el = container.querySelector(`[data-role="${role}"]`);
+    if (!el) return;
+    if (el.tagName === "INPUT") {
+      el.value = value;
+    } else {
+      el.textContent = value;
+    }
+  }
+
+  // Looks up an editable [data-field] input inside `container` — used to
+  // build the field list passed to validateFields.
+  function getField(container, name) {
+    return container.querySelector(`[data-field="${name}"]`);
+  }
+
+  // Wires a set of .op-tab buttons to show/hide same-keyed panels and to
+  // notify `onActivate(op)` on every switch (including the initial one, via
+  // the returned activate() call). `panels` is a { op: element } map; each
+  // tab's `data-op` must match a key.
+  function setupTabs(tabButtons, panels, onActivate) {
+    function activate(op) {
+      tabButtons.forEach((tab) => tab.classList.toggle("is-active", tab.dataset.op === op));
+      Object.keys(panels).forEach((key) => panels[key].classList.toggle("is-hidden", key !== op));
+      onActivate(op);
+    }
+    tabButtons.forEach((tab) => tab.addEventListener("click", () => activate(tab.dataset.op)));
+    return activate;
+  }
+
+  return {
+    setupDigitInputs,
+    clearInputs,
+    validateFields,
+    setFeedback,
+    randInt,
+    setRole,
+    getField,
+    setupTabs,
+  };
 })();
