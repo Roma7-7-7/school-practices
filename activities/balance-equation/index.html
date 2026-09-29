@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#4763e4">
+  <title>Знайди пропущене число</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="../../index.html">← На головну</a>
+    <header class="site-header">
+      <h1>Знайди пропущене число</h1>
+      <p>Обидві частини рівності мають бути однакові — впиши число, якого не вистачає</p>
+    </header>
+
+    <div class="equation" id="equation">
+      <div class="equation-row">
+        <span class="slot" data-slot="0"></span>
+        <span class="operator" data-role="op-left"></span>
+        <span class="slot" data-slot="1"></span>
+        <span class="operator">=</span>
+        <span class="slot" data-slot="2"></span>
+        <span class="operator" data-role="op-right"></span>
+        <span class="slot" data-slot="3"></span>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="generateBtn">Нова вправа</button>
+      <button class="btn btn-secondary" id="checkBtn">Перевірити</button>
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+
+    <div class="stopwatch" id="stopwatch">00:00</div>
+  </div>
+
+  <script src="../../assets/js/main.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

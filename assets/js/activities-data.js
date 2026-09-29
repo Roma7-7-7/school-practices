@@ -17,4 +17,11 @@ window.ACTIVITIES = [
     tags: ["додавання", "віднімання", "множення", "ділення", "розрядність"],
     path: "activities/four-operations/index.html",
   },
+  {
+    slug: "balance-equation",
+    title: "Знайди пропущене число",
+    description: "Рівність з двох частин, де одного числа не вистачає — знайди його, щоб обидві частини стали рівними.",
+    tags: ["додавання", "віднімання", "множення", "ділення", "рівності"],
+    path: "activities/balance-equation/index.html",
+  },
 ];
